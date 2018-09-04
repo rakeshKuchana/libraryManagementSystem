@@ -1,0 +1,85 @@
+body
+{
+	background-color: white;
+}
+
+#header
+{
+	background: #111111;
+	color: rgba(255, 255, 255, 0.5);
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 77px;
+}
+
+h1
+{
+	color: white;
+	font-family: arial;
+	margin-top:18px;
+	margin-left:450px;
+	display:inline-block;
+	
+}
+
+#header  > a {
+	display:inline-block;
+	color:white;
+	float:right;
+	margin-top:50px;
+	margin-right:8px;
+	text-decoration:none;
+	
+}
+    
+#header > a:hover{
+	text-decoration:underline;
+}
+
+#loginForm
+{
+	position: relative;
+	top: 100px;
+        background-color:lightgrey;
+        padding:50px;
+        margin: 0px 500px;
+	
+}
+
+input[type=text], input[type=password]{
+	display:inline-block;
+	width:100%;
+	padding-top:7px;
+	padding-bottom:7px;
+	padding-left:12px;
+	border-radius:4px;
+	border: none;
+	margin:6px auto;
+	
+}
+
+input[type=submit]{
+	display:inline-block;
+	width:107%;
+	padding:7px 10px;
+	color:white;
+	background-color:#00c600;
+	border-radius:4px;
+	border: none;
+	cursor: pointer;
+	margin:6px auto;
+	
+}
+
+input[type=submit]:hover{
+	background-color:#00ae00
+}
+
+
+#footer
+{
+	position: fixed;
+	bottom : 10px
+}
