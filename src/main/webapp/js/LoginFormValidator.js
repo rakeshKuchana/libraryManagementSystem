@@ -1,18 +1,17 @@
-function validateLoginForm()
+function validateForm()
 {
-    var username = document.forms['loginForm']['username'].value;
-    var password = document.forms['loginForm']['password'].value;
-    
-    if(username === '')
+    var user = document.forms["loginForm"]["username"].value;
+    var password = document.forms["loginForm"]["password"].value;
+
+    if (user === "")
     {
-        alert('Username is mandatory.');
-        return false;
+	alert("Username is mandatory.");
+	return false;
     }
-    
-    if(password === '')
+
+    if (password === "")
     {
-        alert('password is mandatory.');
-        return false;
+        alert("Password is mandatory.");
+	return false;
     }
-    
 }

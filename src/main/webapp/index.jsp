@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <jsp:forward page="jsp/login.jsp"/>
+        <jsp:forward page="WEB-INF/jsp/login.jsp"/>
     </body>
 </html>

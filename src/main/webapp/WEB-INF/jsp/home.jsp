@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <title>home</title>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     </head>
     <body>
-        <!--Header-->
-	<header id="header">
-            <h1>Library Management System</h1>
-            <a href="jsp/login.jsp">Login</a>
-        </header>
-				
-	<footer id="footer">
-            <p>copyright @ rakesh</p>
-        </footer>
+        <c:if test="${sessionScope.session_userRole == 'admin'}">
+            <jsp:include page="WEB-INF/jsp/adminHome.jsp"/> 
+        </c:if>
+        
+        <c:if test="${sessionScope.session_userRole == 'librarian'}">
+            <jsp:include page="WEB-INF/jsp/librarianHome.jsp"/> 
+        </c:if>
     </body>
 </html>

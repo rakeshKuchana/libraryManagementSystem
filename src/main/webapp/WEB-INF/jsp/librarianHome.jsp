@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>home</title>
     </head>
     <body>
-        <h1>This is admin home page</h1>
+        <h1>This is librarian home page</h1>
     </body>
 </html>
