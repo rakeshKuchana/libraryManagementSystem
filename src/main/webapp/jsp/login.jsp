@@ -12,7 +12,7 @@
 	</header>
 
         <div id="form-section">
-            <form action="login" name="loginForm" method="post" onsubmit="return validateForm()">
+            <form action="home" name="loginForm" method="post" onsubmit="return validateForm()">
 		<table>
                     <tbody>
                         <tr>

@@ -2,12 +2,11 @@ package com.rakesh.librarymanagementsystem.filter;
 
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
-import com.rakesh.librarymanagementsystem.service.UserService;
+import com.rakesh.librarymanagementsystem.service.AuthenticationService;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -21,9 +20,11 @@ import javax.servlet.http.HttpSession;
 public class AuthenticationFilter implements Filter
 {
     
+    AuthenticationService authenticationService;
+    
     public void init(FilterConfig filterConfig) throws ServletException
     {
-        //initialize nothing
+        authenticationService  = new AuthenticationService();
     }
     
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
@@ -32,24 +33,21 @@ public class AuthenticationFilter implements Filter
         userDto.setUsername(request.getParameter("username"));
         userDto.setPassword(request.getParameter("password"));
         
-        UserService userService  = new UserService();
-        User user = userService.getUserDetails(userDto);
+        User user = authenticationService.authenticate(userDto);
         
-        if (userDto.getUsername().equalsIgnoreCase(user.getUsername()) && userDto.getPassword().equals(user.getPassword()))
+        if (user != null)
         {
-            //Start session here
-            HttpSession session = ((HttpServletRequest)request).getSession();
-            session.setAttribute("session_username", user.getUsername());
-            session.setAttribute("session_userRole", user.getRole());
-
+            HttpSession session = ((HttpServletRequest)request).getSession(true);
+            session.setAttribute("session_user", user);
+            
             chain.doFilter(request, response);
         }
         else
         {
             request.setAttribute("ErrorMsg", "Invalid Credentials");
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/login.jsp");
-            rd.forward(request, response);
-        }   
+            request.getRequestDispatcher("/").forward(request, response);
+        }
+         
     }
     
     public void destroy()

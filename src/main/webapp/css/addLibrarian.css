@@ -1,0 +1,24 @@
+div {
+    width: 400px;
+    margin: 0 auto;
+}
+
+tbody label, thead th label {
+  font-family: arial;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+input[type=text], input[type=email]{
+  padding: 5px;
+}
+
+input[type=submit]{
+padding: 5px;
+width: 80px;
+}
+
+thead th label
+{
+    font-weight: bold;
+}

@@ -1,0 +1,15 @@
+div {
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+    width: 500px;
+    height:200px;
+}
+
+div p {
+    font-family: arial;
+}
+
+div p a {
+    text-decoration: none;
+}

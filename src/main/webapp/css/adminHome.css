@@ -1,0 +1,43 @@
+header {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: #461f24;
+  height: 100px;
+  width: 100%;
+  font-family: arial;
+}
+
+header h1 {
+  position: absolute;
+  top: 10px;
+  left: 500px;
+  color: #c8eded;
+  
+}
+
+#logout {
+	color: #c8eded;
+	position: absolute;
+	top: 70px;
+	right: 15px;
+
+}
+
+#logout:hover, #addLibrarian:hover {
+	color: white;
+}
+
+footer {
+  position: fixed;
+  top: 600px;
+  font-size: 12px;
+  font-family: arial;
+}
+
+#addLibrarian {
+  color: #c8eded;
+  position: absolute;
+  top: 70px;
+  right: 100px;
+}
