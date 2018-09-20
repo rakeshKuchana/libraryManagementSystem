@@ -13,26 +13,19 @@ import java.sql.SQLException;
 public class AuthenticationService
 {
     UserDao userDao = null;
-    User user = null;
     
     public AuthenticationService()
     {
         userDao = new UserDao();
-        user = new User();
     }
     
     public User authenticate(UserDto userDto) throws SQLException, AuthenticationException
     {
-        user = userDao.findByUserId(userDto.getId());
-        
-        if (user.getUserId() == null)
+        User user = userDao.findById(userDto.getId());
+
+        if (user == null)
         {
-            user = userDao.findByEmailId(userDto.getId());
-            
-            if (user.getUserId() == null)
-            {
-                throw new AuthenticationException("Invalid Credentials");
-            }
+            throw new AuthenticationException("Invalid Credentials");
         }
         
         return user;

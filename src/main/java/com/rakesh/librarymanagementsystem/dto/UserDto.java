@@ -7,6 +7,7 @@ package com.rakesh.librarymanagementsystem.dto;
 public class UserDto
 {
     private String id;
+    private String UserId;
     private String firstname;
     private String lastname;
     private String password;
@@ -22,6 +23,14 @@ public class UserDto
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String UserId) {
+        this.UserId = UserId;
     }
 
     public String getFirstname() {
