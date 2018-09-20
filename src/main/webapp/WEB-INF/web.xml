@@ -3,11 +3,11 @@
     <display-name>libraryManagementSystem</display-name>
     
     <servlet>
-        <servlet-name>loginServlet</servlet-name>
+        <servlet-name>homeJsp</servlet-name>
         <jsp-file>/jsp/home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>loginServlet</servlet-name>
+        <servlet-name>homeJsp</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     
@@ -15,19 +15,46 @@
         <filter-name>authenticationFilter</filter-name>
         <filter-class>com.rakesh.librarymanagementsystem.filter.AuthenticationFilter</filter-class>
     </filter>
-    <filter>
+    <!--<filter>
         <filter-name>authorizationFilter</filter-name>
         <filter-class>com.rakesh.librarymanagementsystem.filter.AuthorizationFilter</filter-class>
-    </filter>
+    </filter>-->
      
     <filter-mapping>
         <filter-name>authenticationFilter</filter-name>
         <url-pattern>/home</url-pattern>
     </filter-mapping>
-    <filter-mapping>
+   <!-- <filter-mapping>
         <filter-name>authorizationFilter</filter-name>
         <url-pattern>/jsp/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
+    
+    <servlet>
+        <servlet-name>addLibrarian</servlet-name>
+        <servlet-class>com.rakesh.librarymanagementsystem.controller.AddLibrarianController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addLibrarian</servlet-name>
+        <url-pattern>/addLibrarian</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>registrationLinkServlet</servlet-name>
+        <servlet-class>com.rakesh.librarymanagementsystem.controller.RegistrationLinkController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationLinkServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>registrationServlet</servlet-name>
+        <servlet-class>com.rakesh.librarymanagementsystem.controller.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationServlet</servlet-name>
+        <url-pattern>/librarianRegistration</url-pattern>
+    </servlet-mapping>
     
     <resource-ref>
         <description>DB Connection</description>

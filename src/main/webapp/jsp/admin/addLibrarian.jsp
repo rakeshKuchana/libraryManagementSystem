@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<link href="../css/addLibrarian.css" type="text/css" rel="stylesheet"/>
+	<link href="/libraryManagementSystem/css/addLibrarian.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
 	<div>
-            <form action="" method="post">
+            <form action="/libraryManagementSystem/addLibrarian" method="post">
                 <table>
                     <thead>
 			<th colspan="2"><label>Add Librarian details</label></th>

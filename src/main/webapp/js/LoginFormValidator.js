@@ -15,3 +15,19 @@ function validateForm()
 	return false;
     }
 }
+
+function showPassword()
+{
+    
+    var x = document.forms["loginForm"]["password"];
+    
+    if (x.type === "password")
+    {
+        x.type = "text";
+    }
+    else
+    {
+        x.type = "password";
+    }
+    
+}

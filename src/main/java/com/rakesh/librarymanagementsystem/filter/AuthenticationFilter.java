@@ -2,8 +2,10 @@ package com.rakesh.librarymanagementsystem.filter;
 
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
+import com.rakesh.librarymanagementsystem.exception.AuthenticationException;
 import com.rakesh.librarymanagementsystem.service.AuthenticationService;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -30,23 +32,30 @@ public class AuthenticationFilter implements Filter
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
         UserDto userDto = new UserDto();
-        userDto.setUsername(request.getParameter("username"));
+        
+        userDto.setId(request.getParameter("username"));
         userDto.setPassword(request.getParameter("password"));
         
-        User user = authenticationService.authenticate(userDto);
+        User user = null;
         
-        if (user != null)
+        try
         {
+            user = authenticationService.authenticate(userDto);
             HttpSession session = ((HttpServletRequest)request).getSession(true);
             session.setAttribute("session_user", user);
             
             chain.doFilter(request, response);
         }
-        else
+        catch(AuthenticationException ae)
         {
-            request.setAttribute("ErrorMsg", "Invalid Credentials");
+            request.setAttribute("ErrorMsg", ae);
             request.getRequestDispatcher("/").forward(request, response);
         }
+        catch(SQLException e)
+        {
+            
+        }
+    
          
     }
     

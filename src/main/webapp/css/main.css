@@ -45,6 +45,11 @@ width: 80px;
     color: red;
 }
 
+.checkbox {
+    font-family: arial;
+    font-size: 13px;
+}
+
 footer {
   position: fixed;
   top: 600px;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="../css/logout.css" type="text/css" rel="stylesheet"/>
+        <link href="/libraryManagementSystem/css/logout.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <!--invalidate session -->
