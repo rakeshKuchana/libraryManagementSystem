@@ -15,7 +15,7 @@
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><label id="err-msg"><c:out value="${requestScope.ErrorMsg}"/></label></td>
+                            <td><label id="err-msg"><c:out value="${sessionScope.ErrorMsg}"/></label></td>
                         </tr>
                         <tr>
                             <td><label>Username:</label></td>
@@ -35,7 +35,6 @@
 			</tr>
                     </tbody>
 		</table>
-                <input type="hidden" name="targetURI" value="${param.pageId}"/>
             </form>
 	</div>
                         

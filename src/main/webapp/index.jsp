@@ -1,1 +1,1 @@
-<% response.sendRedirect("/libraryManagementSystem/login");%>
+<% response.sendRedirect("/libraryManagementSystem/home");%>

@@ -7,8 +7,8 @@
     <body>
        	<header>
             <h1>Library Management System</h1>
-            <a id="logout" href="/libraryManagementSystem/jsp/logout.jsp">Logout</a>
-            <a id="addLibrarian" href="/libraryManagementSystem/jsp/admin/addLibrarian.jsp">Add Librarian</a>
+            <a id="logout" href="/libraryManagementSystem/logout">Logout</a>
+            <a id="addLibrarian" href="/libraryManagementSystem/WEB-INF/jsp/admin/addLibrarian.jsp">Add Librarian</a>
 	</header>
 	<footer>
             <h4>Copyright @ rakesh</h4>

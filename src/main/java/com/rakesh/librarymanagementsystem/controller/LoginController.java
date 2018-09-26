@@ -1,5 +1,6 @@
 package com.rakesh.librarymanagementsystem.controller;
 
+import com.rakesh.librarymanagementsystem.constant.AppConstants;
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import com.rakesh.librarymanagementsystem.service.LoginService;
@@ -32,6 +33,8 @@ public class LoginController extends HttpServlet
         UserDto userDto = new UserDto();
         userDto.setId(request.getParameter("username"));
         userDto.setPassword(request.getParameter("password"));
+        HttpSession session = request.getSession();
+        String targetURI;
         
         try
         {
@@ -39,25 +42,24 @@ public class LoginController extends HttpServlet
             
             if (user != null)
             {
-                HttpSession session = request.getSession();
-                session.setAttribute("session_user", user);
-                String targetURI = request.getParameter("targetURI");
+                session.setAttribute(AppConstants.SESSION_USER, user);
+                targetURI = (String)session.getAttribute(AppConstants.TARGET_URI);
                
-                if (targetURI.equals(""))
+               
+                if (targetURI == null)
                 {
-                    response.sendRedirect("/libraryManagementSystem/jsp/home.jsp");
-                }
-                else
-                {
-                    response.sendRedirect(targetURI);
-                }
+                    targetURI = AppConstants.HOME_URI;
+                }  
                 
             }
             else
             {
-                request.setAttribute("ErrorMsg", "Invalid Credentials");
-                request.getRequestDispatcher("/login").include(request, response);
+                session.setAttribute("ErrorMsg", "Invalid Credentials");
+                targetURI = AppConstants.LOGIN_URI;
+                
             }
+            
+            response.sendRedirect(targetURI);
             
         }
         catch(SQLException se)
