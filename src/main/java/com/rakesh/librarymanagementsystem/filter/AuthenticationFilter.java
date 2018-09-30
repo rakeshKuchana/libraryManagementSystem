@@ -3,6 +3,7 @@ package com.rakesh.librarymanagementsystem.filter;
 import com.rakesh.librarymanagementsystem.constant.AppConstants;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -20,37 +21,40 @@ import javax.servlet.http.HttpSession;
 public class AuthenticationFilter implements Filter
 {
     
-    private ArrayList<String> excludeURIlist;
-    private ArrayList<String> excludePathList;
+    private List<String> excludeUriList;
+    private List<String> excludePathList;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
-        excludeURIlist = new ArrayList();
-        excludeURIlist.add(AppConstants.LOGIN_URI);
-        excludeURIlist.add(AppConstants.LOGIN_CONTROLLER_URI);
+        excludeUriList = new ArrayList();
+        excludeUriList.add(AppConstants.URI_LOGIN);
+        excludeUriList.add(AppConstants.URI_LOGIN_CONTROLLER);
         
         excludePathList = new ArrayList();
-        excludePathList.add(AppConstants.CSS_PATH);
-        excludePathList.add(AppConstants.HTML_PATH);
-        excludePathList.add(AppConstants.JS_PATH);
+        excludePathList.add(AppConstants.PATH_CSS);
+        excludePathList.add(AppConstants.PATH_HTML);
+        excludePathList.add(AppConstants.PATH_JS);
+        excludePathList.add(AppConstants.PATH_IMG);
         
     }
     
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
-        HttpSession session = ((HttpServletRequest)request).getSession();
-        String URI = ((HttpServletRequest)request).getRequestURI();
+        HttpServletRequest req = (HttpServletRequest)request;
         
-        if (isExcludedFromFilter(URI) || session.getAttribute(AppConstants.SESSION_USER) != null)
+        HttpSession session = req.getSession();
+        String uri = req.getRequestURI();
+        
+        if (isExcludedFromFilter(uri) || session.getAttribute(AppConstants.SESSION_USER) != null)
         {
             chain.doFilter(request, response);
         }
         else
         {
-            session.setAttribute(AppConstants.TARGET_URI, (((HttpServletRequest)request).getRequestURI()));
-            ((HttpServletResponse)response).sendRedirect(AppConstants.LOGIN_URI);
+            session.setAttribute(AppConstants.ATTR_URI_TARGET, req.getRequestURI());
+            ((HttpServletResponse)response).sendRedirect(AppConstants.URI_LOGIN);
         }
         
     }
@@ -72,7 +76,7 @@ public class AuthenticationFilter implements Filter
             }
         }
         
-        return excludeURIlist.contains(URI);
+        return excludeUriList.contains(URI);
 
     }
     

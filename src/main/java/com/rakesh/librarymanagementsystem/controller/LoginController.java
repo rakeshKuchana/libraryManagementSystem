@@ -31,10 +31,10 @@ public class LoginController extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         UserDto userDto = new UserDto();
-        userDto.setId(request.getParameter("username"));
-        userDto.setPassword(request.getParameter("password"));
+        userDto.setId(request.getParameter(AppConstants.PARAM_USER_NAME));
+        userDto.setPassword(request.getParameter(AppConstants.PARAM_PASSWORD));
         HttpSession session = request.getSession();
-        String targetURI;
+        String targetUri;
         
         try
         {
@@ -43,23 +43,23 @@ public class LoginController extends HttpServlet
             if (user != null)
             {
                 session.setAttribute(AppConstants.SESSION_USER, user);
-                targetURI = (String)session.getAttribute(AppConstants.TARGET_URI);
+                targetUri = (String)session.getAttribute(AppConstants.ATTR_URI_TARGET);
                
                
-                if (targetURI == null)
+                if (targetUri == null)
                 {
-                    targetURI = AppConstants.HOME_URI;
+                    targetUri = AppConstants.URI_HOME;
                 }  
                 
             }
             else
             {
-                session.setAttribute("ErrorMsg", "Invalid Credentials");
-                targetURI = AppConstants.LOGIN_URI;
+                session.setAttribute(AppConstants.ATTR_ERROR_MSG, AppConstants.MSG_INVALID_CREDS);
+                targetUri = AppConstants.URI_LOGIN;
                 
             }
             
-            response.sendRedirect(targetURI);
+            response.sendRedirect(targetUri);
             
         }
         catch(SQLException se)

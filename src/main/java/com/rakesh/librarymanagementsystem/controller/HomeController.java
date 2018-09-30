@@ -25,11 +25,11 @@ public class HomeController extends HttpServlet
         
         if (user.getRole().equals(AppConstants.ROLE_ADMIN))
         {
-            targetURI = AppConstants.ADMIN_HOME_JSP;
+            targetURI = AppConstants.JSP_ADMIN_HOME;
         }
         else if (user.getRole().equals(AppConstants.ROLE_LIBRARIAN))
         {
-            targetURI = AppConstants.LIBRARIAN_HOME_JSP;
+            targetURI = AppConstants.JSP_LIBRARIAN_HOME;
         }
         
         request.getRequestDispatcher(targetURI).forward(request, response);

@@ -1,4 +1,4 @@
-package com.rakesh.librarymanagementsystem.Utilities;
+package com.rakesh.librarymanagementsystem.util;
 
 /**
  *

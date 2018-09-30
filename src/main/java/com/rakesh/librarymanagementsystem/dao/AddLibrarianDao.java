@@ -1,6 +1,6 @@
 package com.rakesh.librarymanagementsystem.dao;
 
-import com.rakesh.librarymanagementsystem.Utilities.ConnectionUtility;
+import com.rakesh.librarymanagementsystem.util.ConnectionFactory;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class AddLibrarianDao
     
     public AddLibrarianDao()
     {
-        conn = ConnectionUtility.getSQLConnection();
+        conn = ConnectionFactory.getSQLConnection();
     }
     
     public void addLibrarian(UserDto userDto)

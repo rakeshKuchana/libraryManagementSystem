@@ -1,0 +1,71 @@
+body {
+    background-image: url("/libraryManagementSystem/img/login-background-image.jpg");
+    background-size: cover;
+}
+
+header {
+    font-family: arial;
+    color: white;
+    width: 440px;
+    margin: 0 auto;
+}
+
+
+.transparent-block {
+    background-color: white;
+    opacity: 0.1;
+    position: absolute;
+    top: 120px;
+    left: 480px;
+    width:390px;
+    height: 200px;
+}
+
+.top-form {
+    position: absolute;
+    z-index: 1;
+    width: 390px;
+    height: 200px;
+    top: 120px;
+    left: 480px;
+}
+
+
+
+table {
+    position: absolute;
+    top:40px;
+    left:45px;
+}
+
+td {
+    padding: 4px;
+}
+
+label {
+    color:white;
+    font-family: arial;
+    font-size: 12px;
+
+}
+
+input[type=submit] {
+    font-weight: bold;
+    width: 80px;
+}
+
+footer {
+    position: fixed;
+    top: 600px;
+    font-size: 12px;
+    font-family: arial;
+    color: white;
+    font-weight: 100;
+
+}
+
+#err-msg {
+    color: red;
+}
+
+
