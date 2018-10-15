@@ -1,9 +1,12 @@
 package com.rakesh.librarymanagementsystem.util;
 
+import com.rakesh.librarymanagementsystem.constant.AppConstants;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.util.Properties;
+import org.apache.commons.dbcp.BasicDataSource;
 
 /**
  *
@@ -11,36 +14,33 @@ import javax.sql.DataSource;
  */
 public class ConnectionFactory
 {
-    static Connection conn = null;
-    private static DataSource dataSource = null;
+    private final BasicDataSource basicDataSource;
+    private static ConnectionFactory connectionFactory;
     
-    static
+    private ConnectionFactory() throws FileNotFoundException, IOException
     {
-        try
-        {
-            Context initContext = new InitialContext();
-            Context envContext = (Context)initContext.lookup("java:/comp/env");
-            dataSource = (DataSource)envContext.lookup("jdbc/worldDB");
-        }
-        catch(Exception e)
-        {
-            
-        }
+        Properties props = PropertyManager.getInstance().getPropertiesFromFileSystem(AppConstants.DATASOURCE_PROPERTIES);
+        
+        basicDataSource = new BasicDataSource();
+        basicDataSource.setDriverClassName(props.getProperty(AppConstants.DRIVER_CLASS));
+        basicDataSource.setUrl(props.getProperty(AppConstants.DRIVER_URL));
+        basicDataSource.setUsername(props.getProperty(AppConstants.DB_USERNAME));
+        basicDataSource.setPassword(props.getProperty(AppConstants.DB_PASSWORD));
         
     }
     
-    public static Connection getSQLConnection()
+    private static ConnectionFactory getInstance() throws FileNotFoundException, IOException
     {
-        
-        try
+        if(connectionFactory == null)
         {
-            conn = dataSource.getConnection();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            connectionFactory = new ConnectionFactory();
         }
         
-        return conn;
+        return connectionFactory;
+    }
+    
+    public static Connection getConnection() throws SQLException, FileNotFoundException, IOException
+    {
+        return getInstance().basicDataSource.getConnection();
     }
 }

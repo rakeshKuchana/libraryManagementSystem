@@ -23,6 +23,13 @@ public interface AppConstants
     public static final String PARAM_PASSWORD = "password";
     public static final String ATTR_ERROR_MSG = "errMsg";
     public static final String MSG_INVALID_CREDS = "Invalid Credentials";
+    public static final String DRIVER_CLASS = "driver.class";
+    public static final String DRIVER_URL = "driver.url";
+    public static final String DB_USERNAME = "username";
+    public static final String DB_PASSWORD = "password";
+    public static final String DATASOURCE_PROPERTIES = "lms.datasource.properties";
+    public static final String DATASOURCE_FILE_PATH = "datasource.file.path";
+    public static final String APPLICATION_PROPERTIES = "application.properties";
     
     
 }

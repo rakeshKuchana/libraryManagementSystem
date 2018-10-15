@@ -11,9 +11,18 @@ public class User
     private String role;
     private String firstName;
     private String lastName;
-    private String emailId;
+    private String emailAddress;
     private String gender;
     private String date;
+    private String registrationId;
+
+    public String getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(String registrationId) {
+        this.registrationId = registrationId;
+    }
     
     public String getUserId() {
         return userId;
@@ -55,12 +64,12 @@ public class User
         this.lastName = lastName;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getGender() {

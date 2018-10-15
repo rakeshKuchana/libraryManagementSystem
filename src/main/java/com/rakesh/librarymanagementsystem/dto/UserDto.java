@@ -11,7 +11,7 @@ public class UserDto
     private String firstname;
     private String lastname;
     private String password;
-    private String emailId;
+    private String emailAddress;
     private String registrationId;
     private String gender;
     private String dateOfBirth;
@@ -57,12 +57,12 @@ public class UserDto
         this.password = password;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getRegistrationId() {

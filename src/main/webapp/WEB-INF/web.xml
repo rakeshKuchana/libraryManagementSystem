@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <display-name>libraryManagementSystem</display-name>
-    
     <servlet>
         <servlet-name>home</servlet-name>
         <servlet-class>com.rakesh.librarymanagementsystem.controller.HomeController</servlet-class>
@@ -10,7 +9,6 @@
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>login</servlet-name>
         <jsp-file>/WEB-INF/jsp/login.jsp</jsp-file>
@@ -19,7 +17,6 @@
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>logout</servlet-name>
         <jsp-file>/WEB-INF/jsp/logout.jsp</jsp-file>
@@ -28,7 +25,6 @@
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>test</servlet-name>
         <jsp-file>/WEB-INF/jsp/test.jsp</jsp-file>
@@ -37,7 +33,6 @@
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>com.rakesh.librarymanagementsystem.controller.LoginController</servlet-class>
@@ -46,7 +41,6 @@
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginController</url-pattern>
     </servlet-mapping>
-    
     <filter>
         <filter-name>authenticationFilter</filter-name>
         <filter-class>com.rakesh.librarymanagementsystem.filter.AuthenticationFilter</filter-class>
@@ -55,7 +49,6 @@
         <filter-name>authenticationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>user</servlet-name>
         <servlet-class>com.rakesh.librarymanagementsystem.controller.UserController</servlet-class>
@@ -64,41 +57,44 @@
         <servlet-name>user</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>addLibrarian</servlet-name>
-        <servlet-class>com.rakesh.librarymanagementsystem.controller.AddLibrarianController</servlet-class>
+        <servlet-class>com.rakesh.librarymanagementsystem.controller.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addLibrarian</servlet-name>
         <url-pattern>/addLibrarian</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>registrationLinkServlet</servlet-name>
         <servlet-class>com.rakesh.librarymanagementsystem.controller.RegistrationLinkController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>registrationLinkServlet</servlet-name>
-        <url-pattern>/registration</url-pattern>
+        <url-pattern>/registrationLn</url-pattern>
     </servlet-mapping>
-    
     <servlet>
-        <servlet-name>registrationServlet</servlet-name>
+        <servlet-name>librarianRegistration</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/librarianRegistration.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>librarianRegistration</servlet-name>
+        <url-pattern>/librarianRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>registration</servlet-name>
         <servlet-class>com.rakesh.librarymanagementsystem.controller.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>registrationServlet</servlet-name>
-        <url-pattern>/librarianRegistration</url-pattern>
+        <servlet-name>registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
     </servlet-mapping>
     
-    <resource-ref>
-        <description>DB Connection</description>
-        <res-ref-name>jdbc/worldDB</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
-   <!-- <error-page>
+    
+    <listener>
+        <listener-class>com.rakesh.librarymanagementsystem.listener.ContextListener</listener-class>
+    </listener>
+    <!-- <error-page>
         <error-code>404</error-code>
         <location>/jsp/error404.jsp</location>
     </error-page>-->

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,11 +21,15 @@ import javax.servlet.http.HttpSession;
 public class LoginController extends HttpServlet
 {
     private LoginService loginService;
+    private Logger logger;
+    
+    
     
     @Override
     public void init(ServletConfig config)
     {
         loginService = new LoginService();
+        logger = Logger.getLogger(LoginController.class);
     }
     
     @Override
@@ -64,11 +69,11 @@ public class LoginController extends HttpServlet
         }
         catch(SQLException se)
         {
-            
+            logger.error(se);
         }
         catch(Exception e)
         {
-            
+            logger.error(e);
         }
         
     }

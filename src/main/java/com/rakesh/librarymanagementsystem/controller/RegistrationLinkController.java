@@ -1,7 +1,7 @@
 package com.rakesh.librarymanagementsystem.controller;
 
 import com.rakesh.librarymanagementsystem.dto.UserDto;
-import com.rakesh.librarymanagementsystem.service.RegistrationService;
+import com.rakesh.librarymanagementsystem.service.RegistrationService2;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 public class RegistrationLinkController extends HttpServlet
 {
     
-    RegistrationService registrationService;
+    RegistrationService2 registrationService;
     
     public void init(ServletConfig config)
     {
-        registrationService = new RegistrationService();
+        registrationService = new RegistrationService2();
     }
     
     
@@ -29,9 +29,17 @@ public class RegistrationLinkController extends HttpServlet
         UserDto userdto = new UserDto();
         userdto.setRegistrationId(request.getParameter("id"));
         
-        String registeredEmailId = registrationService.getRegisteredEmailId(userdto);
+        try
+        {
+            String registeredEmailId = registrationService.getRegisteredEmailId(userdto);
+            request.setAttribute("registeredEmailId", registeredEmailId);
+        }
+        catch(Exception e)
+        {
+            
+        }
         
-        request.setAttribute("registeredEmailId", registeredEmailId);
+        
         
         request.getRequestDispatcher("/jsp/librarianRegistration.jsp").forward(request, response);
         
