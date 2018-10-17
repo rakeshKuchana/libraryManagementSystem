@@ -1,0 +1,95 @@
+body {
+    background-color: #e4e8ea;
+}
+
+header{
+    background-color: #aaaaaa;
+    position: fixed;
+    top: 0px;
+    left:0px;
+    width: 100%;
+    height: 60px;
+    z-index: 2;
+}
+
+header h1 {
+
+    width: 185px;
+    margin: 0 auto;
+    position: relative;
+    top: 10px;
+    font-family: arial;
+
+}
+
+
+header h2 {
+    font-style: italic;
+    font-size: 15px;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+
+}
+
+.table {
+    position: absolute;
+    top: 80px;
+    width: 800px;
+    height: 500px;
+    left: 300px;
+
+}
+
+.table label {
+    font-family: arial;
+    font-size: 17px;
+}
+
+input[type=text], input[type=password] {
+    padding: 8px;
+    width: 300px;
+}
+
+input[type=reset] {
+
+    font-weight: bold;
+    width: 80px;
+    height: 38px;
+    background-color: #00aa00;
+    border: 0px;
+    font-size: 15px;
+    color: white;
+
+}
+
+input[type=submit] {
+
+    font-weight: bold;
+    width: 170px;
+    height: 38px;
+    background-color: #00aa00;
+    border: 0px;
+    font-size: 15px;
+    color: white;
+
+}
+
+input[type=reset]:hover, input[type=submit]:hover {
+    cursor: pointer;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding-bottom: 5px; 
+    padding-top: 5px;
+
+}
+
+#userId, #newPassword, #confirmPassword, #dateOfBirth {
+    color: red;
+}

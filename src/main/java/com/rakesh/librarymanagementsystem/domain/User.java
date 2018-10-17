@@ -13,7 +13,7 @@ public class User
     private String lastName;
     private String emailAddress;
     private String gender;
-    private String date;
+    private String dateOfBirth;
     private String registrationId;
 
     public String getRegistrationId() {
@@ -80,12 +80,12 @@ public class User
         this.gender = gender;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
 }

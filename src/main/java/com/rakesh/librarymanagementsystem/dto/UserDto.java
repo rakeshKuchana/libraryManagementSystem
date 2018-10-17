@@ -14,8 +14,10 @@ public class UserDto
     private String emailAddress;
     private String registrationId;
     private String gender;
-    private String dateOfBirth;
     private String role;
+    private String day;
+    private String month;
+    private String year;
 
     public String getId() {
         return id;
@@ -80,14 +82,6 @@ public class UserDto
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
     
     public String getRole() {
         return role;
@@ -95,6 +89,30 @@ public class UserDto
 
     public void setRole(String role) {
         this.role = role;
+    }
+    
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
 }

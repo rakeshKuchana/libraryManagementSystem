@@ -1,13 +1,15 @@
 package com.rakesh.librarymanagementsystem.controller;
 
-import com.rakesh.librarymanagementsystem.dto.UserDto;
-import com.rakesh.librarymanagementsystem.service.RegistrationService2;
+import com.rakesh.librarymanagementsystem.domain.Registration;
+import com.rakesh.librarymanagementsystem.dto.RegistrationDto;
+import com.rakesh.librarymanagementsystem.service.RegistrationService;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -16,32 +18,32 @@ import javax.servlet.http.HttpServletResponse;
 public class RegistrationLinkController extends HttpServlet
 {
     
-    RegistrationService2 registrationService;
+    private RegistrationService registrationService;
+    private Logger logger;
     
+    @Override
     public void init(ServletConfig config)
     {
-        registrationService = new RegistrationService2();
+        registrationService = new RegistrationService();
+        logger = Logger.getLogger(RegistrationLinkController.class);
     }
     
-    
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        UserDto userdto = new UserDto();
-        userdto.setRegistrationId(request.getParameter("id"));
+        RegistrationDto registrationDto = new RegistrationDto();
+        registrationDto.setId(request.getParameter("regId"));
         
         try
         {
-            String registeredEmailId = registrationService.getRegisteredEmailId(userdto);
-            request.setAttribute("registeredEmailId", registeredEmailId);
+            Registration registration = registrationService.findById(registrationDto);
+            request.setAttribute("registration", registration);
+            request.getRequestDispatcher("/WEB-INF/jsp/registrationComplete.jsp").forward(request, response);
         }
         catch(Exception e)
         {
-            
+            logger.error(e);
         }
-        
-        
-        
-        request.getRequestDispatcher("/jsp/librarianRegistration.jsp").forward(request, response);
         
     }
 }

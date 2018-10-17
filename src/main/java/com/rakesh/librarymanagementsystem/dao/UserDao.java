@@ -39,12 +39,29 @@ public class UserDao
                user.setLastName(rs.getString("last_name"));
                user.setEmailAddress(rs.getString("email_id"));
                user.setGender(rs.getString("gender"));
-               user.setDate(rs.getString("date_of_birth"));
+               user.setDateOfBirth(rs.getString("date_of_birth"));
 
             } 
         }
         
         return user;
+    }
+    
+    public void save(User user) throws SQLException, FileNotFoundException, IOException
+    {
+        try(Connection conn = ConnectionFactory.getConnection())
+        {
+            PreparedStatement stmt = conn.prepareStatement("insert into system.users values (?, ?, ?, ?, ?, ?, to_date(?, 'dd/mm/yyyy'))");
+            stmt.setString(1, user.getUserId());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getFirstName());
+            stmt.setString(4, user.getLastName());
+            stmt.setString(5, user.getEmailAddress());
+            stmt.setString(6, user.getGender());
+            stmt.setString(7, user.getDateOfBirth());
+            
+            stmt.executeUpdate();
+        }
     }
     
 }

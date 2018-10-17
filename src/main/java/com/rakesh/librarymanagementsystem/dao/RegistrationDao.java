@@ -1,11 +1,13 @@
 package com.rakesh.librarymanagementsystem.dao;
 
+import com.rakesh.librarymanagementsystem.domain.Registration;
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.util.ConnectionFactory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -29,5 +31,31 @@ public class RegistrationDao
            
            conn.commit();
        }
+   }
+   
+   public Registration findById(String registrationId) throws FileNotFoundException, IOException, SQLException
+   {
+       
+       Registration registration = null; 
+       
+        try(Connection conn= ConnectionFactory.getConnection())
+        {
+            PreparedStatement stmt = conn.prepareStatement("select first_name, last_name, email_address from system.registration where id=?");
+        
+            stmt.setString(1, registrationId);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next())
+            {
+                registration = new Registration();
+                registration.setFirstName(rs.getString("first_name"));
+                registration.setLastName(rs.getString("last_name"));
+                registration.setEmailAddress(rs.getString("email_address"));
+            }
+            
+        }
+        
+        return registration;
    }
 }

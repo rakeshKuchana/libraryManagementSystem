@@ -62,7 +62,7 @@ public class RegistrationDao2
             stmt.setString(4, userDto.getLastname());
             stmt.setString(5, userDto.getEmailAddress());
             stmt.setString(6, userDto.getGender());
-            stmt.setString(7, userDto.getDateOfBirth());
+            //stmt.setString(7, userDto.getDateOfBirth());
             
             stmt.executeUpdate();
             

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class UserService
 {
-    private UserDao userDao;
+    private final UserDao userDao;
     
     public UserService()
     {
@@ -24,6 +24,20 @@ public class UserService
     {
         User user = userDao.findById(userDto.getId());
         return user;
+    }
+    
+    public void save(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+    {
+        User user = new User();
+        user.setFirstName(userDto.getFirstname());
+        user.setLastName(userDto.getLastname());
+        user.setEmailAddress(userDto.getEmailAddress());
+        user.setGender(userDto.getGender());
+        user.setDateOfBirth(userDto.getDay()+"/"+userDto.getMonth()+"/"+userDto.getYear());
+        user.setUserId(userDto.getUserId());
+        user.setPassword(userDto.getPassword());
+        
+        userDao.save(user);
     }
     
 }

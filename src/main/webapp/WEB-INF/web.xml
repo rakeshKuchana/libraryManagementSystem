@@ -89,6 +89,22 @@
         <servlet-name>registration</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>registrationComplete</servlet-name>
+        <jsp-file>/WEB-INF/jsp/registrationComplete.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationComplete</servlet-name>
+        <url-pattern>/completeRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>registrationCompleteController</servlet-name>
+        <servlet-class>com.rakesh.librarymanagementsystem.controller.RegistrationCompleteController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationCompleteController</servlet-name>
+        <url-pattern>/registrationComplete</url-pattern>
+    </servlet-mapping>
     
     
     <listener>

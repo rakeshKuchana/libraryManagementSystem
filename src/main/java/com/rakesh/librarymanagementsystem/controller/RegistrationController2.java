@@ -33,7 +33,7 @@ public class RegistrationController2 extends HttpServlet
         userDto.setLastname(request.getParameter("lastName"));
         userDto.setEmailAddress(request.getParameter("emailId"));
         userDto.setGender(request.getParameter("gender"));
-        userDto.setDateOfBirth(request.getParameter("dateOfBirth"));
+        //userDto.setDateOfBirth(request.getParameter("dateOfBirth"));
         userDto.setRole("librarian");
         
         try
