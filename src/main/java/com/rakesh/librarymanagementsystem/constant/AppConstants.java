@@ -14,6 +14,8 @@ public interface AppConstants
     public static final String ATTR_URI_TARGET = "targetURI";
     public static final String URI_LOGIN_CONTROLLER = "/libraryManagementSystem/loginController";
     public static final String URI_HOME = "/libraryManagementSystem/home";
+    public static final String URI_REGISTRATION_LINK = "/libraryManagementSystem/registrationLn";
+    public static final String URI_REGISTRATION_COMPLETE =  "/libraryManagementSystem/registrationComplete";
     public static final String ROLE_ADMIN = "admin";
     public static final String ROLE_LIBRARIAN = "librarian";
     public static final String JSP_ADMIN_HOME = "/WEB-INF/jsp/admin/home.jsp";
@@ -30,6 +32,7 @@ public interface AppConstants
     public static final String DATASOURCE_PROPERTIES = "lms.datasource.properties";
     public static final String DATASOURCE_FILE_PATH = "datasource.file.path";
     public static final String APPLICATION_PROPERTIES = "application.properties";
+    public static final String MAIL_PROPERTIES = "mail.properties";
     
     
 }

@@ -36,6 +36,8 @@ public class UserService
         user.setDateOfBirth(userDto.getDay()+"/"+userDto.getMonth()+"/"+userDto.getYear());
         user.setUserId(userDto.getUserId());
         user.setPassword(userDto.getPassword());
+        user.setRole(userDto.getRole());
+        
         
         userDao.save(user);
     }

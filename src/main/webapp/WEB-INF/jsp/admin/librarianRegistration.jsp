@@ -9,8 +9,8 @@
 
         <header>
             <h1>Librarian Registration</h1>
-            <a id="home" href="">Home</a>
-            <a id="logout" href="">Logout</a>
+            <a id="home" href="/libraryManagementSystem/home">Home</a>
+            <a id="logout" href="/libraryManagementSystem/logout">Logout</a>
             <h2>LMS</h2>
         </header>
 
@@ -29,7 +29,7 @@
                 <label id="lastName"></label>
                 <br>
                 <label>Email</label><br>
-                <input type="text" name="email" autocomplete="off" onfocus="validateEmail()" oninput="validateEmail()" spellcheck="false"/><br>
+                <input type="text" name="emailAddress" autocomplete="off" onfocus="validateEmail()" oninput="validateEmail()" spellcheck="false"/><br>
                 <label id="email"></label>
                 <br>
                 <input type="submit" value="Register"/>

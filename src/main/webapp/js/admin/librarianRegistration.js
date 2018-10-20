@@ -43,7 +43,7 @@ function validateLastName()
 function validateEmail()
 {
 
-    var value = document["form"]["email"].value;
+    var value = document["form"]["emailAddress"].value;
     var errorElement = document.getElementById("email");
     var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.\w{2,3}$/;
 

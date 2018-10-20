@@ -1,5 +1,6 @@
 package com.rakesh.librarymanagementsystem.controller;
 
+import com.rakesh.librarymanagementsystem.constant.AppConstants;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import com.rakesh.librarymanagementsystem.service.UserService;
 import java.io.FileNotFoundException;
@@ -43,6 +44,7 @@ public class RegistrationCompleteController extends HttpServlet
         userDto.setYear(request.getParameter("year"));
         userDto.setUserId(request.getParameter("userId"));
         userDto.setPassword(request.getParameter("newPassword"));
+        userDto.setRole(AppConstants.ROLE_LIBRARIAN);
         
         
         try
@@ -50,10 +52,6 @@ public class RegistrationCompleteController extends HttpServlet
             userService.save(userDto);
             PrintWriter out = response.getWriter();
             out.println("<h1>Registered successfully</h1>");
-        }
-        catch(SQLException | FileNotFoundException e)
-        {
-            logger.error(e);
         }
         catch(Exception e)
         {

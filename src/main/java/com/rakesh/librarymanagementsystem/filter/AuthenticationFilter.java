@@ -30,6 +30,8 @@ public class AuthenticationFilter implements Filter
         excludeUriList = new ArrayList();
         excludeUriList.add(AppConstants.URI_LOGIN);
         excludeUriList.add(AppConstants.URI_LOGIN_CONTROLLER);
+        excludeUriList.add(AppConstants.URI_REGISTRATION_LINK);
+        excludeUriList.add(AppConstants.URI_REGISTRATION_COMPLETE);
         
         excludePathList = new ArrayList();
         excludePathList.add(AppConstants.PATH_CSS);

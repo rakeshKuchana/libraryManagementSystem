@@ -22,7 +22,7 @@ public class UserDao
         
         try(Connection conn = ConnectionFactory.getConnection())
         {
-            PreparedStatement stmt = conn.prepareStatement("select * from system.users, system.authorities where id = user_id and (id = ? or email_id = ?)");
+            PreparedStatement stmt = conn.prepareStatement("select * from system.users, system.authorities where id = user_id and (id = ? or email_address = ?)");
             
             stmt.setString(1, id);
             stmt.setString(2, id);
@@ -37,7 +37,7 @@ public class UserDao
                user.setRole(rs.getString("role"));
                user.setFirstName(rs.getString("first_name"));
                user.setLastName(rs.getString("last_name"));
-               user.setEmailAddress(rs.getString("email_id"));
+               user.setEmailAddress(rs.getString("email_address"));
                user.setGender(rs.getString("gender"));
                user.setDateOfBirth(rs.getString("date_of_birth"));
 
@@ -61,6 +61,15 @@ public class UserDao
             stmt.setString(7, user.getDateOfBirth());
             
             stmt.executeUpdate();
+            
+            PreparedStatement stmt2 = conn.prepareStatement("insert into system.authorities values (?, ?)");
+            stmt2.setString(1, user.getUserId());
+            stmt2.setString(2, user.getRole());
+            
+            stmt2.executeUpdate();
+            
+            conn.commit();
+            
         }
     }
     

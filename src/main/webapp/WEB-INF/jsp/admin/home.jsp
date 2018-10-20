@@ -12,7 +12,8 @@
                 <input type="text" name="username" placeholder="Search Librarian here by user ID or Email ID" autocomplete="off" />
                 <button type="submit" name="action" value="search"><img src="/libraryManagementSystem/img/search-icon.png"></button>
             </form>
-            <a href="/libraryManagementSystem/logout">Logout</a>
+            <a id="librarianRegistration" href="/libraryManagementSystem/librarianRegistration">Register Librarian</a>
+            <a id="logout" href="/libraryManagementSystem/logout">Logout</a>
         </header>
 
     <body>

@@ -2,11 +2,9 @@ package com.rakesh.librarymanagementsystem.controller;
 
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import com.rakesh.librarymanagementsystem.service.RegistrationService;
-import com.rakesh.librarymanagementsystem.service.EmailService;
-import java.io.FileNotFoundException;
+import com.rakesh.librarymanagementsystem.util.Mail;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,39 +18,49 @@ import org.apache.log4j.Logger;
  */
 public class RegistrationController extends HttpServlet
 {
+
     private RegistrationService registrationService;
     Logger logger;
-    
+
     @Override
     public void init(ServletConfig config)
     {
         registrationService = new RegistrationService();
         logger = Logger.getLogger(RegistrationController.class);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String emailAddress = request.getParameter("emailAddress");
+        String registrationId = null;
+
         UserDto userDto = new UserDto();
-        userDto.setFirstname(request.getParameter("firstName"));
-        userDto.setLastname(request.getParameter("lastName"));
-        userDto.setEmailAddress(request.getParameter("email"));
-        
+
+        userDto.setFirstname(firstName);
+        userDto.setLastname(lastName);
+        userDto.setEmailAddress(emailAddress);
+
         try
         {
-            String registrationId = registrationService.register(userDto);
+            registrationId = registrationService.register(userDto);
+            String body = "Hello " + firstName + " " + lastName + "\n" + "Please complete your registration using the following link" + "\n"
+                    + "http://localhost:8084/libraryManagementSystem/registrationLn?regId=" + registrationId;
+
+            Mail.send(emailAddress, "lms registration", body);
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
             out.println("<h1>Registered successfully</h1>");
+            
         }
-        catch(FileNotFoundException | SQLException e)
+        catch (Exception e)
         {
             logger.error(e);
         }
-        
-        
-        
-        //send email to the librarian to complete registration
+
         //EmailService.sendEmail(request.getParameter("email"), "lms registration", "Hello Rakesh");
         //out.println("<h1>Mail sent successfully</h1>");
     }

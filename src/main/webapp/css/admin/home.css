@@ -42,7 +42,7 @@ input, button {
     outline-width: 0px;
 }
 
-header a {
+header #logout {
     text-decoration: none;
     position: absolute;
     top: 70px;
@@ -51,7 +51,16 @@ header a {
     color: white;
 }
 
-header a:hover {
+header #librarianRegistration {
+    text-decoration: none;
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    font-family: arial;
+    color: white;
+}
+
+header #logout:hover, header #librarianRegistration:hover {
     text-decoration: underline;
 }
 
