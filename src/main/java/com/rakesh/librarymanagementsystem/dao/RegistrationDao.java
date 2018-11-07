@@ -16,7 +16,11 @@ import java.sql.SQLException;
  */
 public class RegistrationDao
 {
-   public void save(User user) throws SQLException, FileNotFoundException, IOException
+    /**
+     * Creates record in registration table
+     * @param user
+     */
+    public void create(User user)
    {
        try(Connection conn = ConnectionFactory.getConnection())
        {
@@ -30,6 +34,10 @@ public class RegistrationDao
            stmt.executeUpdate();
            
            conn.commit();
+       }
+       catch(SQLException e)
+       {
+           throw new RuntimeException(e);
        }
    }
    

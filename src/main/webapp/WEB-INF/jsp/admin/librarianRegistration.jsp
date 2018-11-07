@@ -20,6 +20,7 @@
 
         <form name="form" class="top-form" onsubmit="return validate();" action="/libraryManagementSystem/registration" method="post">
             <div class="table">
+                <label id="validationError">${requestScope.registrationResponse}</label><br>
                 <label>First Name</label><br>
                 <input type="text" name="firstName" autocomplete="off" maxlength="30" onfocus="validateFirstName()" oninput="validateFirstName()" spellcheck="false"/><br>
                 <label id="firstName"></label>

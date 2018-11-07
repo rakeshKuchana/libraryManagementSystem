@@ -1,0 +1,38 @@
+body {
+    background-color: #ecf7f9;
+}
+
+header {
+    width: 200px;
+    margin: 0 auto;
+    font-family: arial;
+}
+
+table {
+    position: absolute;
+    top: 80px;
+    left: 500px;
+}
+
+label {
+    font-family: arial;
+}
+
+td {
+    padding-bottom: 5px; 
+    padding-top: 5px;	
+}
+
+input[type=text], input[type=password] {
+    padding: 5px;
+    width: 250px;
+}
+
+button {
+    width: 120px;
+    height: 27px;
+}
+
+#studentId {
+    color: red;
+}

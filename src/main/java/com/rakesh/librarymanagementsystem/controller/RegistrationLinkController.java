@@ -1,5 +1,6 @@
 package com.rakesh.librarymanagementsystem.controller;
 
+import com.rakesh.librarymanagementsystem.constant.AppConstants;
 import com.rakesh.librarymanagementsystem.domain.Registration;
 import com.rakesh.librarymanagementsystem.dto.RegistrationDto;
 import com.rakesh.librarymanagementsystem.service.RegistrationService;
@@ -32,25 +33,25 @@ public class RegistrationLinkController extends HttpServlet
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String registrationId = request.getParameter("regId");
+        String registrationId = request.getParameter(AppConstants.PARAM_REG_ID);
         String errorMessage = null;
 
         if (registrationId != null)
         {
             RegistrationDto registrationDto = new RegistrationDto();
-            registrationDto.setId(request.getParameter("regId"));
+            registrationDto.setId(registrationId);
 
             try
             {
                 Registration registration = registrationService.findById(registrationDto);
                 if (registration != null)
                 {
-                    request.setAttribute("registration", registration);
-                    request.getRequestDispatcher("/WEB-INF/jsp/registrationComplete.jsp").forward(request, response);
+                    request.setAttribute(AppConstants.ATTR_REGISTRATION, registration);
+                    request.getRequestDispatcher(AppConstants.JSP_REGISTRATION_COMPLETE).forward(request, response);
                 }
                 else
                 {
-                    errorMessage = "Invalid registration link";
+                    errorMessage = AppConstants.MSG_INVALID_REGISTRATION_LINK;
                 }
             }
             catch (Exception e)
@@ -60,7 +61,7 @@ public class RegistrationLinkController extends HttpServlet
         }
         else
         {
-            errorMessage = "Invalid registration link";
+            errorMessage = AppConstants.MSG_INVALID_REGISTRATION_LINK;
         }
         
         if (errorMessage != null)

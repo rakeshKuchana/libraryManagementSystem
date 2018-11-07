@@ -121,3 +121,7 @@ header h2 {
 #firstName, #lastName, #email {
     color: yellow;
 }
+
+#validationError {
+    color: yellow;
+}

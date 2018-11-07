@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Rakesh Kuchana
  */
-public class AuthenticationFilter implements Filter
+public class IdentificationFilter implements Filter
 {
     
     private List<String> excludeUriList;

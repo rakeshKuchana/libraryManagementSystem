@@ -1,10 +1,10 @@
 package com.rakesh.librarymanagementsystem.controller;
 
+import com.rakesh.librarymanagementsystem.constant.AppConstants;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import com.rakesh.librarymanagementsystem.service.RegistrationService;
 import com.rakesh.librarymanagementsystem.util.Mail;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,35 +33,42 @@ public class RegistrationController extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String emailAddress = request.getParameter("emailAddress");
-        String registrationId = null;
+        String firstName = request.getParameter(AppConstants.PARAM_FIRST_NAME);
+        String lastName = request.getParameter(AppConstants.PARAM_LAST_NAME);
+        String emailAddress = request.getParameter(AppConstants.PARAM_EMAIL_ADDRESS);
+        String registrationId;
 
         UserDto userDto = new UserDto();
 
-        userDto.setFirstname(firstName);
-        userDto.setLastname(lastName);
+        userDto.setFirstName(firstName);
+        userDto.setLastName(lastName);
         userDto.setEmailAddress(emailAddress);
 
         try
         {
             registrationId = registrationService.register(userDto);
-            String body = "Hello " + firstName + " " + lastName + "\n" + "Please complete your registration using the following link" + "\n"
-                    + "http://localhost:8084/libraryManagementSystem/registrationLn?regId=" + registrationId;
 
-            Mail.send(emailAddress, "lms registration", body);
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.println("<h1>Registered successfully</h1>");
+            if (registrationId != null)
+            {
+                String body = "Hello " + firstName + " " + lastName + "\n" + "Please complete your registration using the following link" + "\n"
+                        + "http://localhost:8084/libraryManagementSystem/registrationLn?regId=" + registrationId;
+
+                Mail.send(emailAddress, "lms registration", body);
+
+                request.setAttribute(AppConstants.ATTR_REGISTRATION_RESPONSE, AppConstants.MSG_MAIL_SENT);
+            }
+            else
+            {
+                request.setAttribute(AppConstants.ATTR_REGISTRATION_RESPONSE, AppConstants.MSG_ALREADY_REGISTERED_EMAIL);
+            }
             
+            request.getRequestDispatcher("/librarianRegistration").forward(request, response);
+
         }
         catch (Exception e)
         {
             logger.error(e);
         }
 
-        //EmailService.sendEmail(request.getParameter("email"), "lms registration", "Hello Rakesh");
-        //out.println("<h1>Mail sent successfully</h1>");
     }
 }

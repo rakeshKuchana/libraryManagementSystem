@@ -1,11 +1,14 @@
 package com.rakesh.librarymanagementsystem.service;
 
+import com.rakesh.librarymanagementsystem.constant.AppConstants;
 import com.rakesh.librarymanagementsystem.dao.UserDao;
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
+import com.rakesh.librarymanagementsystem.exception.AuthenticationException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -20,26 +23,82 @@ public class UserService
         userDao = new UserDao();
     }
     
-    public User findById(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+//    public User findById(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+//    {
+//        User user = userDao.findById(userDto.getId());
+//        return user;
+//    }
+    
+    public List searchById(UserDto userDto) throws SQLException, FileNotFoundException, IOException
     {
-        User user = userDao.findById(userDto.getId());
-        return user;
+        return userDao.searchById(userDto.getId());
     }
     
-    public void save(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+    /**
+     * Service to complete librarian registration
+     * @param userDto
+     */
+    public void create(UserDto userDto)
     {
         User user = new User();
-        user.setFirstName(userDto.getFirstname());
-        user.setLastName(userDto.getLastname());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
         user.setEmailAddress(userDto.getEmailAddress());
         user.setGender(userDto.getGender());
-        user.setDateOfBirth(userDto.getDay()+"/"+userDto.getMonth()+"/"+userDto.getYear());
+        user.setDateOfBirth(userDto.getDay()+AppConstants.CHAR_FORWARD_SLASH+userDto.getMonth()+AppConstants.CHAR_FORWARD_SLASH+userDto.getYear());
         user.setUserId(userDto.getUserId());
         user.setPassword(userDto.getPassword());
         user.setRole(userDto.getRole());
         
+        userDao.create(user);
+    }
+    
+    public void delete(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+    {
+        userDao.delete(userDto.getId());
+    }
+    
+    /**
+     * @param userDto - takes userDto with username and password
+     * @return User - returns User with authentication and authorization information.If user not found or password does not match then throws AuthenticationException
+     * @throws AuthenticationException - this exception is throws if username is not found or password does not match
+     */
+    public User authenticate(UserDto userDto) throws AuthenticationException
+    {
+        User user = userDao.getAuthInfoByUsername(userDto.getId());
         
-        userDao.save(user);
+        if (user != null && user.getPassword().equals(userDto.getPassword()))
+        {
+            //remove password from User object before sending it to the controller for security purpose as we don't want to set the password into session object
+            user.setPassword(null);
+            return user;
+        }
+        else
+        {
+            throw new AuthenticationException(AppConstants.MSG_INVALID_CREDS);
+        }
+    }
+    
+    public boolean isAlreadyRegistered(UserDto userDto)
+    {
+        User user = new User();
+        user.setEmailAddress(userDto.getEmailAddress());
+        
+        return userDao.getEmailAddress(user) != null;
+    }
+    
+    /**
+     * To check whether the userId already exists
+     * @param userDto
+     * @return boolean
+     */
+    public boolean isUserIdAlreadyUsed(UserDto userDto)
+    {
+        User user = new User();
+        user.setUserId(userDto.getUserId());
+        
+        return userDao.getUserId(user) != null;
+        
     }
     
 }

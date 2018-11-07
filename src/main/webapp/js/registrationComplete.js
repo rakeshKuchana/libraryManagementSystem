@@ -90,5 +90,22 @@ function validate()
 
 }
 
+window.onload = function(){
+    document.getElementById("day").value=document.getElementById("dayValue").value;
+    document.getElementById("month").value=document.getElementById("monthValue").value;
+    document.getElementById("year").value=document.getElementById("yearValue").value;
+    
+    var gender = document.getElementById("gender").value;
+    
+    if (gender === 'male')
+    {
+        document.getElementById('maleGender').setAttribute('checked','checked');
+    }
+    else if (gender === 'female')
+    {
+        document.getElementById('femaleGender').setAttribute('checked','checked');
+    }
+}
+
 
 

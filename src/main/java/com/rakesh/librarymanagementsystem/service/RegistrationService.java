@@ -9,34 +9,47 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
+
 /**
  *
  * @author Rakesh Kuchana
  */
 public class RegistrationService
 {
+
     private final RegistrationDao registrationDao;
-    
+
     public RegistrationService()
     {
         registrationDao = new RegistrationDao();
     }
-    
-    public String register(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+
+    /**
+     * Registers a new librarian and returns the registration ID
+     * @param userDto
+     * @return String - returns registration ID
+     */
+    public String register(UserDto userDto)
     {
-        String registrationId = UUID.randomUUID().toString();
-        
-        User user = new User();
-        user.setFirstName(userDto.getFirstname());
-        user.setLastName(userDto.getLastname());
-        user.setRegistrationId(registrationId);
-        user.setEmailAddress(userDto.getEmailAddress());
-        
-        registrationDao.save(user);
-        
+        String registrationId= null;
+        UserService userService = new UserService();
+
+        if (!userService.isAlreadyRegistered(userDto))
+        {
+            registrationId = UUID.randomUUID().toString();
+
+            User user = new User();
+            user.setFirstName(userDto.getFirstName());
+            user.setLastName(userDto.getLastName());
+            user.setRegistrationId(registrationId);
+            user.setEmailAddress(userDto.getEmailAddress());
+
+            registrationDao.create(user);
+        }
+
         return registrationId;
     }
-    
+
     public Registration findById(RegistrationDto registrationDto) throws FileNotFoundException, IOException, SQLException
     {
         Registration registration = registrationDao.findById(registrationDto.getId());

@@ -4,6 +4,7 @@
         <title>lms registration</title>
         <link rel="stylesheet" type="text/css" href="/libraryManagementSystem/css/registrationComplete.css">
         <script type="text/javascript" src="/libraryManagementSystem/js/registrationComplete.js"></script>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     </head>
     <body>
         <header>
@@ -16,26 +17,44 @@
 
             <div class="table">
                 <table>
-                    <tr>
-                        <td><label>First Name:</label><br><input type="text" name="firstName" value="${requestScope.registration.firstName}" spellcheck="false" readonly="readonly"/></td>
-                        <td><label>Last Name:</label><br><input type="text" name="lastName" value="${requestScope.registration.lastName}" spellcheck="false" readonly="readonly"/></td>
-                    </tr>
 
-                    <tr>
-                        <td><label>Email:</label><br>
-                            <input type="text" name="emailAddress" value="${requestScope.registration.emailAddress}" spellcheck="false" readonly="readonly"/></td>
-                    </tr>
+                    <c:if test="${requestScope.registration != null}">
+                        <tr>
+                            <td><label>First Name:</label><br><input type="text" name="firstName" value="${requestScope.registration.firstName}" spellcheck="false" readonly="readonly"/></td>
+                            <td><label>Last Name:</label><br><input type="text" name="lastName" value="${requestScope.registration.lastName}" spellcheck="false" readonly="readonly"/></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Email:</label><br>
+                                <input type="text" name="emailAddress" value="${requestScope.registration.emailAddress}" spellcheck="false" readonly="readonly"/></td>
+                        </tr>
+                    </c:if>
+
+                    <c:if test="${requestScope.user != null}">
+                        <tr>
+                            <td><label>First Name:</label><br><input type="text" name="firstName" value="${requestScope.user.firstName}" spellcheck="false" readonly="readonly"/></td>
+                            <td><label>Last Name:</label><br><input type="text" name="lastName" value="${requestScope.user.lastName}" spellcheck="false" readonly="readonly"/></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Email:</label><br>
+                                <input type="text" name="emailAddress" value="${requestScope.user.emailAddress}" spellcheck="false" readonly="readonly"/></td>
+                        </tr>
+                    </c:if>
+
+
 
                     <tr>
                         <td><label>Gender:</label><br>
-                            <input type="radio" name="gender" value="male" checked="checked"/><label>Male</label>
-                            <input type="radio" name="gender" value="Female"/><label>Female</label></td>
+                            <input id="gender" type="hidden" value="${requestScope.user.gender}"/>
+                            <input id="maleGender" type="radio" name="gender" value="male" checked="checked"/><label>Male</label>
+                            <input id="femaleGender" type="radio" name="gender" value="female"/><label>Female</label></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><label>Date Of Birth:</label><br>
-
-                            <select name="day" onfocus="validateDateOfBirth()" oninput="validateDateOfBirth()">
+                            <input id = "dayValue" type="hidden" value="${requestScope.user.day}"/>
+                            <select id="day" name="day" onfocus="validateDateOfBirth()" oninput="validateDateOfBirth()">
                                 <option value="">dd</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -69,8 +88,8 @@
                                 <option value="30">30</option>
                                 <option value="31">31</option>
                             </select>
-
-                            <select name="month" onfocus="validateDateOfBirth()" oninput="validateDateOfBirth()">
+                            <input id = "monthValue" type="hidden" value="${requestScope.user.month}"/>    
+                            <select id="month" name="month" onfocus="validateDateOfBirth()" oninput="validateDateOfBirth()">
                                 <option value="">mm</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -85,7 +104,8 @@
                                 <option value="11">11</option>
                                 <option value="12">12</option>
                             </select>
-                            <select name="year" onfocus="validateDateOfBirth()" oninput="validateDateOfBirth()">
+                            <input id = "yearValue" type="hidden" value="${requestScope.user.year}"/>
+                            <select id="year" name="year" onfocus="validateDateOfBirth()" oninput="validateDateOfBirth()">
                                 <option value="">yyyy</option>
                                 <option value="1950">1950</option>
                                 <option value="1951">1951</option>
@@ -144,8 +164,8 @@
                     </tr>
                     <tr>
                         <td><label>New user ID:</label><br>
-                            <input type="text" name="userId" autocomplete="off" maxlength="30" spellcheck="false" onfocus="validateUserId()" oninput="validateUserId()"/></td>
-                        <td><label id="userId"></label></td>
+                            <input type="text" name="userId" value="${requestScope.user.userId}" autocomplete="off" maxlength="30" spellcheck="false" onfocus="validateUserId()" oninput="validateUserId()"/></td>
+                        <td><label id="userId">${requestScope.registrationResponse}</label></td>
                     </tr>
                     <tr>
                         <td><label>New password:</label><br>

@@ -4,11 +4,14 @@ import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import com.rakesh.librarymanagementsystem.service.UserService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,11 +21,13 @@ public class UserController extends HttpServlet
 {
     
     private UserService userService;
+    Logger logger;
     
     @Override
     public void init()
     {
         userService = new UserService();
+        logger = Logger.getLogger(UserController.class);
     }
     
     @Override
@@ -31,22 +36,22 @@ public class UserController extends HttpServlet
         UserDto userDto = new UserDto();
         userDto.setId(request.getParameter("username"));
         
-        User user = null;
+        List<User> list = null;
         
         if (request.getParameter("action").equals("search"))
         {
             try
             {
-                user = userService.findById(userDto);
+                list = userService.searchById(userDto);
             }
             catch(SQLException e)
             {
-               
+               logger.error(e);
             }
             
-            if (user != null)
+            if (list != null)
             {
-                request.setAttribute("user", user);
+                request.setAttribute("userList", list);
                 
             }
             else
@@ -56,11 +61,28 @@ public class UserController extends HttpServlet
             
             request.getRequestDispatcher("/home").forward(request, response);
         }
+        
     }
     
     @Override
-    public void destroy()
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        UserDto userDto = new UserDto();
+        userDto.setId(request.getParameter("userId"));
         
+        if (request.getParameter("action").equals("delete"))
+        {
+            try
+            {
+                userService.delete(userDto);
+                PrintWriter out = response.getWriter();
+                out.println("<h1>Deleted successfully</h1>");
+            }
+            catch(SQLException e)
+            {
+               logger.error(e);
+            }
+        }
     }
+   
 }

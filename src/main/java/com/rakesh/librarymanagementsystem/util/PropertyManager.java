@@ -12,36 +12,49 @@ import java.util.Properties;
  */
 public class PropertyManager
 {
+
     private static PropertyManager propertyManager;
-    
+
     private PropertyManager()
     {
-        
+
     }
-    
+
     public static PropertyManager getInstance()
     {
-        if(propertyManager == null)
+        if (propertyManager == null)
         {
             propertyManager = new PropertyManager();
         }
-        
+
         return propertyManager;
     }
-    
+
     public Properties getProperties(String fileName) throws FileNotFoundException, IOException
     {
         Properties props = new Properties();
-        props.load(getClass().getResourceAsStream("/property/"+fileName));
+        props.load(getClass().getResourceAsStream("/property/" + fileName));
         return props;
     }
-    
-    public Properties getPropertiesFromFileSystem(String fileName) throws FileNotFoundException, IOException
+
+    public Properties getPropertiesFromFileSystem(String fileName)
     {
-        Properties appProps = PropertyManager.getInstance().getProperties(AppConstants.APPLICATION_PROPERTIES);
-        
-        Properties props = new Properties();
-        props.load(new FileInputStream(appProps.getProperty(AppConstants.DATASOURCE_FILE_PATH) + fileName));
-        return props;
+        try
+        {
+            Properties appProps = PropertyManager.getInstance().getProperties(AppConstants.APPLICATION_PROPERTIES);
+
+            Properties props = new Properties();
+            props.load(new FileInputStream(appProps.getProperty(AppConstants.DATASOURCE_FILE_PATH) + fileName));
+            return props;
+        }
+        catch(FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
     }
 }

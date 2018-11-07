@@ -62,7 +62,7 @@ header #logout {
     color: white;
 }
 
-header #librarianRegistration {
+header #add-student {
     text-decoration: none;
     position: absolute;
     top: 70px;
@@ -71,7 +71,16 @@ header #librarianRegistration {
     color: white;
 }
 
-header #logout:hover, header #librarianRegistration:hover {
+header #add-book {
+    text-decoration: none;
+    position: absolute;
+    top: 70px;
+    right: 210px;
+    font-family: arial;
+    color: white;
+}
+
+header #logout:hover, header #add-student:hover, header #add-book:hover {
     text-decoration: underline;
 }
 
@@ -79,7 +88,7 @@ table {
     border: 1px solid red;
     position: absolute;
     top: 150px;
-    left: 400px;
+    left: 280px;
     border-collapse: collapse;
 }
 

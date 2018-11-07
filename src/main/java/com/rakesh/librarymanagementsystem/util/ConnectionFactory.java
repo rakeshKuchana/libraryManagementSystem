@@ -17,7 +17,7 @@ public class ConnectionFactory
     private final BasicDataSource basicDataSource;
     private static ConnectionFactory connectionFactory;
     
-    private ConnectionFactory() throws FileNotFoundException, IOException
+    private ConnectionFactory()
     {
         Properties props = PropertyManager.getInstance().getPropertiesFromFileSystem(AppConstants.DATASOURCE_PROPERTIES);
         
@@ -29,7 +29,7 @@ public class ConnectionFactory
         
     }
     
-    private static ConnectionFactory getInstance() throws FileNotFoundException, IOException
+    private static ConnectionFactory getInstance()
     {
         if(connectionFactory == null)
         {
@@ -39,8 +39,16 @@ public class ConnectionFactory
         return connectionFactory;
     }
     
-    public static Connection getConnection() throws SQLException, FileNotFoundException, IOException
+    public static Connection getConnection()
     {
-        return getInstance().basicDataSource.getConnection();
+        try
+        {
+            return getInstance().basicDataSource.getConnection();
+        }
+        catch(SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        
     }
 }

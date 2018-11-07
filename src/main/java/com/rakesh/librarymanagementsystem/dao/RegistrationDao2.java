@@ -58,8 +58,8 @@ public class RegistrationDao2
             
             stmt.setString(1, userDto.getId());
             stmt.setString(2, userDto.getPassword());
-            stmt.setString(3, userDto.getFirstname());
-            stmt.setString(4, userDto.getLastname());
+            stmt.setString(3, userDto.getFirstName());
+            stmt.setString(4, userDto.getLastName());
             stmt.setString(5, userDto.getEmailAddress());
             stmt.setString(6, userDto.getGender());
             //stmt.setString(7, userDto.getDateOfBirth());
