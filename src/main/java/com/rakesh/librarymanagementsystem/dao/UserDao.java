@@ -54,48 +54,56 @@ public class UserDao
         return user;
     }
 
-    public List<User> searchById(String id) throws SQLException, FileNotFoundException, IOException
+    /**
+     * @param username
+     * @return  List
+     */
+    public List<User> searchByUsername(String username)
     {
 
         final String QUERY = "select id, password, role, first_name, last_name, email_address, gender, to_char(date_of_birth,'DD-MON-YYYY') date_of_birth from system.users, system.authorities where id = user_id and (id like ? or email_address like ?)";
         User user;
-        List<User> list = null;
+        List<User> userList = null;
 
         try (Connection conn = ConnectionFactory.getConnection())
         {
             PreparedStatement stmt = conn.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            stmt.setString(1, "%" + id + "%");
-            stmt.setString(2, "%" + id + "%");
+            stmt.setString(1, "%" + username + "%");
+            stmt.setString(2, "%" + username + "%");
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next())
             {
-                list = new ArrayList();
+                userList = new ArrayList();
                 rs.beforeFirst();
 
                 while (rs.next())
                 {
                     user = new User();
 
-                    user.setUserId(rs.getString("id"));
-                    user.setPassword(rs.getString("password"));
-                    user.setRole(rs.getString("role"));
-                    user.setFirstName(rs.getString("first_name"));
-                    user.setLastName(rs.getString("last_name"));
-                    user.setEmailAddress(rs.getString("email_address"));
-                    user.setGender(rs.getString("gender"));
-                    user.setDateOfBirth(rs.getString("date_of_birth"));
+                    user.setUserId(rs.getString(DBConstants.COLUMN_ID));
+                    user.setPassword(rs.getString(DBConstants.COLUMN_PASSWORD));
+                    user.setRole(rs.getString(DBConstants.COLUMN_ROLE));
+                    user.setFirstName(rs.getString(DBConstants.COLUMN_FIRST_NAME));
+                    user.setLastName(rs.getString(DBConstants.COLUMN_LAST_NAME));
+                    user.setEmailAddress(rs.getString(DBConstants.COLUMN_EMAIL_ADDRESS));
+                    user.setGender(rs.getString(DBConstants.COLUMN_GENDER));
+                    user.setDateOfBirth(rs.getString(DBConstants.COLUMN_DATE_OF_BIRTH));
 
-                    list.add(user);
+                    userList.add(user);
 
                 }
             }
 
         }
+        catch(SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
 
-        return list;
+        return userList;
     }
     
     /**
@@ -139,22 +147,35 @@ public class UserDao
 
     }
     
-    public void delete(String id) throws SQLException, FileNotFoundException, IOException
+    /**
+     * deletes records from users and authorities tables
+     * @param userId
+     */
+    public void delete(String userId)
     {
         try(Connection conn = ConnectionFactory.getConnection())
         {
             PreparedStatement stmt = conn.prepareStatement("delete from system.authorities where user_id = ?");
-            stmt.setString(1, id);
+            stmt.setString(1, userId);
             stmt.executeUpdate();
             
             PreparedStatement stmt2 = conn.prepareStatement("delete from system.users where id = ?");
-            stmt2.setString(1, id);
+            stmt2.setString(1, userId);
             stmt2.executeUpdate();
             
             conn.commit();
         }
+        catch(SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
     
+    /**
+     * returns email address if exists otherwise returns null
+     * @return user
+     * @param String
+     */
     public String getEmailAddress(User user)
     {
         String emailAddress = null;

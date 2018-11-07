@@ -5,9 +5,6 @@ import com.rakesh.librarymanagementsystem.dao.UserDao;
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.dto.UserDto;
 import com.rakesh.librarymanagementsystem.exception.AuthenticationException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -23,15 +20,13 @@ public class UserService
         userDao = new UserDao();
     }
     
-//    public User findById(UserDto userDto) throws SQLException, FileNotFoundException, IOException
-//    {
-//        User user = userDao.findById(userDto.getId());
-//        return user;
-//    }
-    
-    public List searchById(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+    /**
+     * @param userDto
+     * @return List
+     */
+    public List searchByUsername(UserDto userDto)
     {
-        return userDao.searchById(userDto.getId());
+        return userDao.searchByUsername(userDto.getId());
     }
     
     /**
@@ -53,7 +48,11 @@ public class UserService
         userDao.create(user);
     }
     
-    public void delete(UserDto userDto) throws SQLException, FileNotFoundException, IOException
+    /**
+     * removes the user
+     * @param userDto
+     */
+    public void delete(UserDto userDto)
     {
         userDao.delete(userDto.getId());
     }
@@ -79,6 +78,10 @@ public class UserService
         }
     }
     
+    /**
+     * @param userDto
+     * @return boolean
+     */
     public boolean isAlreadyRegistered(UserDto userDto)
     {
         User user = new User();

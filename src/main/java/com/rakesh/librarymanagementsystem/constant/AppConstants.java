@@ -14,6 +14,7 @@ public interface AppConstants
     public static final String ATTR_URI_TARGET = "targetURI";
     public static final String URI_LOGIN_CONTROLLER = "/libraryManagementSystem/loginController";
     public static final String URI_HOME = "/libraryManagementSystem/home";
+    public static final String URI_RELATIVE_HOME = "/home";
     public static final String URI_REGISTRATION_LINK = "/libraryManagementSystem/registrationLn";
     public static final String URI_REGISTRATION_COMPLETE =  "/libraryManagementSystem/registrationComplete";
     public static final String ROLE_ADMIN = "admin";
@@ -23,10 +24,13 @@ public interface AppConstants
     public static final String JSP_REGISTRATION_COMPLETE = "/WEB-INF/jsp/registrationComplete.jsp";
     public static final String PATH_IMG = "/libraryManagementSystem/img";
     public static final String PARAM_USER_NAME = "username";
+    public static final String PARAM_ACTION = "action";
     public static final String PARAM_PASSWORD = "password";
     public static final String PARAM_FIRST_NAME = "firstName";
     public static final String PARAM_LAST_NAME = "lastName";
     public static final String PARAM_EMAIL_ADDRESS = "emailAddress";
+    public static final String PARAM_VALUE_SEARCH = "search";
+    public static final String PARAM_VALUE_DELETE = "delete";
     public static final String PARAM_GENDER = "gender";
     public static final String PARAM_DAY = "day";
     public static final String PARAM_MONTH = "month";
@@ -37,6 +41,7 @@ public interface AppConstants
     public static final String ATTR_ERROR_MSG = "errMsg";
     public static final String ATTR_REGISTRATION_RESPONSE = "registrationResponse";
     public static final String ATTR_USER = "user";
+    public static final String ATTR_USER_LIST = "userList";
     public static final String ATTR_REGISTRATION = "registration";
     public static final String MSG_INVALID_CREDS = "Invalid Credentials";
     public static final String DRIVER_CLASS = "driver.class";
@@ -51,6 +56,7 @@ public interface AppConstants
     public static final String MSG_ALREADY_REGISTERED_EMAIL = "A user is already registered with this email address";
     public static final String MSG_ALREADY_USED_USER_ID = "User ID already used. Choose a different ID"; 
     public static final String MSG_INVALID_REGISTRATION_LINK = "Invalid registration link";
+    public static final String MSG_NO_RESULTS_FOUND = "No results found";
     public static final char CHAR_FORWARD_SLASH = '/';
     
     
