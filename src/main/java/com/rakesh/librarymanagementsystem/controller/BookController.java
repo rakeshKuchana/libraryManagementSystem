@@ -38,47 +38,30 @@ public class BookController extends HttpServlet
 
         BookDto bookDto = new BookDto();
 
-        if (request.getParameter("action").equals("search"))
+        if (request.getParameter(AppConstants.PARAM_ACTION).equals(AppConstants.PARAM_VALUE_SEARCH))
         {
 
-            bookDto.setName(request.getParameter("name"));
+            bookDto.setName(request.getParameter(AppConstants.PARAM_NAME));
 
             try
             {
-                List list = bookService.searchBooksByNameOrAuthor(bookDto);
+                List booksList = bookService.searchBooksByNameOrAuthor(bookDto);
 
-                if (list != null)
+                if (booksList != null)
                 {
-                    request.setAttribute("booksList", list);
+                    request.setAttribute(AppConstants.ATTR_BOOKS_LIST, booksList);
                 }
                 else
                 {
-                    request.setAttribute("errMsg", "No results found");
+                    request.setAttribute(AppConstants.ATTR_ERROR_MSG, AppConstants.MSG_NO_RESULTS_FOUND);
                 }
 
-                request.getRequestDispatcher("/home").forward(request, response);
+                request.getRequestDispatcher(AppConstants.URI_RELATIVE_HOME).forward(request, response);
             }
             catch (Exception e)
             {
                 logger.error(e);
             }
-        }
-        else if (request.getParameter("action").equals("return"))
-        {
-            bookDto.setId(request.getParameter("id"));
-
-            try
-            {
-                bookService.returnBook(bookDto);
-
-                PrintWriter out = response.getWriter();
-                out.println("<h1>Returned successfully</h1>");
-            }
-            catch (Exception e)
-            {
-                logger.error(e);
-            }
-
         }
 
     }
@@ -88,9 +71,10 @@ public class BookController extends HttpServlet
     {
 
         BookDto bookDto = new BookDto();
-        if (request.getParameter("action").equals("return"))
+        
+        if (request.getParameter(AppConstants.PARAM_ACTION).equals(AppConstants.PARAM_VALUE_RETURN))
         {
-            bookDto.setId(request.getParameter("id"));
+            bookDto.setId(request.getParameter(AppConstants.PARAM_ID));
 
             try
             {
@@ -105,28 +89,28 @@ public class BookController extends HttpServlet
             }
 
         }
-        else if(request.getParameter("action").equals("issue"))
+        else if(request.getParameter(AppConstants.PARAM_ACTION).equals(AppConstants.PARAM_VALUE_ISSUE))
         {
             Book book = new Book();
-            book.setId(request.getParameter("id"));
-            book.setAuthor(request.getParameter("author"));
-            book.setName(request.getParameter("name"));
+            book.setId(request.getParameter(AppConstants.PARAM_ID));
+            book.setAuthor(request.getParameter(AppConstants.PARAM_AUTHOR));
+            book.setName(request.getParameter(AppConstants.PARAM_NAME));
             
-            request.setAttribute("book", book);
-            request.getRequestDispatcher("/issue").forward(request, response);
+            request.setAttribute(AppConstants.ATTR_BOOK, book);
+            request.getRequestDispatcher(AppConstants.URI_RELATIVE_ISSUE).forward(request, response);
         }
-        else if(request.getParameter("action").equals("issueBook"))
+        else if(request.getParameter(AppConstants.PARAM_ACTION).equals(AppConstants.PARAM_VALUE_ISSUE_BOOK))
         {
-            HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession(AppConstants.BOOLEAN_FALSE);
             
             User user = (User)session.getAttribute(AppConstants.SESSION_USER);
             
             String issuedBy = user.getUserId();
-            bookDto.setId(request.getParameter("id"));
+            bookDto.setId(request.getParameter(AppConstants.PARAM_ID));
             
             try
             {
-                bookService.issueBook(bookDto, issuedBy, request.getParameter("studentId"));
+                bookService.issueBook(bookDto, issuedBy, request.getParameter(AppConstants.PARAM_STUDENT_ID));
                 
                 PrintWriter out = response.getWriter();
                 out.println("<h1>Issued successfully</h1>");

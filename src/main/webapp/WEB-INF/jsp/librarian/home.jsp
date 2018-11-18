@@ -13,8 +13,8 @@
                 <input type="text" name="name" placeholder="Search a book here by name or author.." autocomplete="off" />
                 <button id="search" type="submit" name="action" value="search"><img id="search-img" src="/libraryManagementSystem/img/search-icon.png"></button>
             </form>
-            <a id="add-book" href="/libraryManagementSystem/librarianRegistration">Add Book</a>
-            <a id="add-student" href="/libraryManagementSystem/librarianRegistration">Add Student</a>
+           <!-- <a id="add-book" href="">Add Book</a>
+            <a id="add-student" href="">Add Student</a>-->
             <a id="logout" href="/libraryManagementSystem/logout">Logout</a>
         </header>
 

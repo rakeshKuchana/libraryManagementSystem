@@ -30,23 +30,33 @@ public interface AppConstants
     public static final String PARAM_LAST_NAME = "lastName";
     public static final String PARAM_EMAIL_ADDRESS = "emailAddress";
     public static final String PARAM_VALUE_SEARCH = "search";
+    public static final String PARAM_VALUE_RETURN = "return";
+    public static final String PARAM_VALUE_ISSUE = "issue";
+    public static final String PARAM_VALUE_ISSUE_BOOK = "issueBook";
     public static final String PARAM_VALUE_DELETE = "delete";
+    public static final String PARAM_AUTHOR = "author";
+    public static final String PARAM_STUDENT_ID = "studentId";
     public static final String PARAM_GENDER = "gender";
     public static final String PARAM_DAY = "day";
     public static final String PARAM_MONTH = "month";
     public static final String PARAM_YEAR = "year";
     public static final String PARAM_USER_ID = "userId";
+    public static final String PARAM_ID = "id";
     public static final String PARAM_NEW_PASSWORD = "newPassword";
     public static final String PARAM_REG_ID = "regId";
     public static final String ATTR_ERROR_MSG = "errMsg";
     public static final String ATTR_REGISTRATION_RESPONSE = "registrationResponse";
     public static final String ATTR_USER = "user";
+    public static final String ATTR_BOOK = "book";
+    public static final String URI_RELATIVE_ISSUE = "/issue";
     public static final String ATTR_USER_LIST = "userList";
+    public static final String ATTR_BOOKS_LIST = "booksList";
     public static final String ATTR_REGISTRATION = "registration";
     public static final String MSG_INVALID_CREDS = "Invalid Credentials";
     public static final String DRIVER_CLASS = "driver.class";
     public static final String DRIVER_URL = "driver.url";
     public static final String DB_USERNAME = "username";
+    public static final String PARAM_NAME = "name";
     public static final String DB_PASSWORD = "password";
     public static final String DATASOURCE_PROPERTIES = "lms.datasource.properties";
     public static final String DATASOURCE_FILE_PATH = "datasource.file.path";
@@ -58,6 +68,7 @@ public interface AppConstants
     public static final String MSG_INVALID_REGISTRATION_LINK = "Invalid registration link";
     public static final String MSG_NO_RESULTS_FOUND = "No results found";
     public static final char CHAR_FORWARD_SLASH = '/';
+    public static final boolean BOOLEAN_FALSE = false;
     
     
 }

@@ -3,8 +3,6 @@ package com.rakesh.librarymanagementsystem.dao;
 import com.rakesh.librarymanagementsystem.constant.DBConstants;
 import com.rakesh.librarymanagementsystem.domain.User;
 import com.rakesh.librarymanagementsystem.util.ConnectionFactory;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

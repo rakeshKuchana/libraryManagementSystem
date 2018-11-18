@@ -1,9 +1,8 @@
 package com.rakesh.librarymanagementsystem.dao;
 
+import com.rakesh.librarymanagementsystem.constant.DBConstants;
 import com.rakesh.librarymanagementsystem.domain.Book;
 import com.rakesh.librarymanagementsystem.util.ConnectionFactory;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +17,7 @@ import java.util.List;
 public class BookDao
 {
 
-    public List searchBooksByNameOrAuthor(String name) throws SQLException
+    public List searchBooksByNameOrAuthor(String name)
     {
         List<Book> list = null;
 
@@ -39,14 +38,14 @@ public class BookDao
                 while (rs.next())
                 {
                     Book book = new Book();
-                    book.setId(rs.getString("id"));
-                    book.setName(rs.getString("name"));
-                    book.setAuthor(rs.getString("author"));
-                    book.setStatus(rs.getString("status"));
-                    book.setIssued_to(rs.getString("issued_to"));
-                    book.setIssue_date(rs.getString("issue_date"));
-                    book.setExpected_return_date(rs.getString("expected_return_date"));
-                    book.setIssued_by(rs.getString("issued_by"));
+                    book.setId(rs.getString(DBConstants.COLUMN_ID));
+                    book.setName(rs.getString(DBConstants.COLUMN_NAME));
+                    book.setAuthor(rs.getString(DBConstants.COLUMN_AUTHOR));
+                    book.setStatus(rs.getString(DBConstants.COLUMN_STATUS));
+                    book.setIssued_to(rs.getString(DBConstants.COLUMN_ISSUED_TO));
+                    book.setIssue_date(rs.getString(DBConstants.COLUMN_ISSUE_DATE));
+                    book.setExpected_return_date(rs.getString(DBConstants.COLUMN_EXPECTED_RETURN_DATE));
+                    book.setIssued_by(rs.getString(DBConstants.COLUMN_ISSUED_BY));
                     
                     list.add(book);
                 }
@@ -55,9 +54,13 @@ public class BookDao
             return list;
 
         }
+        catch(SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
     
-    public void deleteFromXref(String id) throws SQLException
+    public void deleteFromXref(String id)
     {
         try(Connection conn = ConnectionFactory.getConnection())
         {
@@ -68,9 +71,13 @@ public class BookDao
             
             conn.commit();
         }
+        catch(SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
     
-    public void createXref(Book book) throws SQLException
+    public void createXref(Book book)
     {
         try(Connection conn = ConnectionFactory.getConnection())
         {
@@ -83,6 +90,10 @@ public class BookDao
             stmt.executeUpdate();
             
             conn.commit();
+        }
+        catch(SQLException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 }
